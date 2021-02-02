@@ -1,0 +1,37 @@
+{
+  "name": "mycvapp",
+  "version": "1.0.0",
+  "description": "Cv app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon dist/index.js",
+    "build": "tsc -w && npm run nodemon",
+    "start": "node dist/index.js"
+  },
+  "author": "Daniel Mendoza",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dropbox": "^9.0.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "isomorphic-fetch": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.9",
+    "@types/express": "^4.17.11",
+    "@types/express-fileupload": "^1.1.6",
+    "@types/isomorphic-fetch": "0.0.35",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/pg": "^7.14.9"
+  }
+}

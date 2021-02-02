@@ -1,4 +1,6 @@
 const { Client } = require('pg');
+import { QueryError } from 'mysql2';
+import { QueryResult } from 'pg';
 import { DbConection } from '../interfaces/Conection';
 
 // Clase para correr coneccion de Pgsql
@@ -39,8 +41,89 @@ export default class PostgreSQL {
     this.connection.connect();
   }
 
+
+  // Inicializar instancia
   public static instance(data:DbConection) {
     return this._instance || ( this._instance = new this(data) );
+  }
+
+  // Metodo que retorna informacion de query
+  // Recibe parametros -> query:string (consulta), data:array (datos privados)  
+  public query(query = '', data = []) {
+    
+    return new Promise((resolve, reject) => {
+
+      query = PostgreSQL.statements(query);
+
+      this.connection.query( query, data, async (err:QueryError, results: QueryResult) => {
+  
+        if(err) {
+          reject(err.stack);
+        }
+  
+        resolve(results.rows);
+  
+      });
+
+    });
+
+  }
+
+  // Metodo que retorna la actualizacion de una tabla
+  /* 
+    Recibe parametros -> 
+      query:string = 'UPDATE table_name SET data? WHERE id=?', 
+      data:array[body:object, id:number]
+  */ 
+  queryPatch(query:string = '', data:any[] = []) {
+    return new Promise ((resolve, reject) => {
+      let body:any = data[0];
+      
+      query = PostgreSQL.statementsPatch(query, body);
+      query = PostgreSQL.statements(query);
+
+      let colValues:string[] = Object.keys(body).map( (key:string) => body[key] );
+      colValues.push(data[1]);
+
+      this.connection.query( query, colValues, async (err: QueryError, results: QueryResult) => {
+  
+        if(err) {
+          reject(err.stack);
+        }
+        
+        resolve(results.rows);
+  
+      });
+
+    })   
+  }
+
+  // Metodo que retorna query UPDATE con los datos body
+  // Recibe parametros -> query:string (consulta), body:object (datos de actualizacion)
+  static statementsPatch(query:string, body:any) {
+    let set:string[] = [];
+
+    Object.keys(body).forEach( key => set.push(`${key}=?`) );
+    
+    let queryProto:string[] = query.split('data?');
+    queryProto.splice(1, 0, set.join(', '));
+    
+    return queryProto.join('');
+  }
+
+  // Metodo que retorna query con los placeholdres '?' remplzados a '$1', '$2', ...
+  // Recibe parametro -> data:string (query)
+  static statements(data:string) {
+    let dataProto:string[] = data.split('?');
+    let dataChar:string;
+
+    for(let i = 0; i < dataProto.length - 1; i++) {
+      dataProto[i] += `$${i+1}` 
+    }
+
+    dataChar = dataProto.join('');
+
+    return dataChar;
   }
 
 }

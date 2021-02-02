@@ -11,16 +11,40 @@ export default class Model {
     this.created_at = model.created_at;
   }
 
-  static async all () {}
+  static async all ():Promise<unknown> {
+    return new Promise((resolve, reject) => {
 
-  static async paginate (init:number = 0, end:number = 0) {}
+    })
+  }
 
-  static async byId (id:number) {}
+  static async paginate (init:number = 0, end:number = 0):Promise<unknown> {
+    return new Promise((resolve, reject) => {
 
-  static async create (body:string) {}
+    })
+  }
 
-  async udpate (body:string) {}
+  static async byId (id:number):Promise<unknown> {
+    return new Promise((resolve, reject) => {
 
-  async delete () {}
+    })
+  }
+
+  static async create (body:ModelData):Promise<unknown> {
+    return new Promise((resolve, reject) => {
+
+    })
+  }
+
+  async udpate (body:ModelData):Promise<unknown> {
+    return new Promise((resolve, reject) => {
+
+    })
+  }
+
+  async delete () : Promise<unknown> {
+    return new Promise((resolve, reject) => {
+
+    })
+  }
 }
 

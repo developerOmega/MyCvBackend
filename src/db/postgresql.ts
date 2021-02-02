@@ -49,7 +49,7 @@ export default class PostgreSQL {
 
   // Metodo que retorna informacion de query
   // Recibe parametros -> query:string (consulta), data:array (datos privados)  
-  public query(query = '', data = []) {
+  public query(query:string = '', data:any = []) {
     
     return new Promise((resolve, reject) => {
 
@@ -102,7 +102,7 @@ export default class PostgreSQL {
   // Recibe parametros -> query:string (consulta), body:object (datos de actualizacion)
   static statementsPatch(query:string, body:any) {
     let set:string[] = [];
-
+    
     Object.keys(body).forEach( key => set.push(`${key}=?`) );
     
     let queryProto:string[] = query.split('data?');

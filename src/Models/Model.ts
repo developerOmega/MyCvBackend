@@ -15,15 +15,20 @@ export default class Model {
     this.created_at = model.created_at;
   }
 
+  protected strip(data:string):string {
+    return data.replace(/(<([^>]+)>)/gi, "");
+  }
+
   static async all(){
     const data = await db.query(`SELECT * FROM ${ this.table }`);
     return data;
   }
 
   static async paginate (init:number = 0, end:number = 0) {
+
     let data = init != 0 && end != 0 ? 
       await db.query(`SELECT * FROM ${ this.table } WHERE id >= ? AND id <= ? ORDER BY id ASC`, [init, end]) :
-      await db.query(`SELECT * FROM admins`);
+      await db.query(`SELECT * FROM ${this.table}`);
     return data;
   }
 

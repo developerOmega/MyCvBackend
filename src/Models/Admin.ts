@@ -15,9 +15,9 @@ export default class Admin extends Model {
 
   constructor(admin:ModelAndAdmin){
     super(admin);
-    this.name = admin.name;
-    this.email = admin.email;
-    this.password = admin.password;
+    this.name = this.strip(admin.name);
+    this.email = this.strip(admin.email);
+    this.password = this.strip(admin.password);
 
   }
 

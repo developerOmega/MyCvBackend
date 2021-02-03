@@ -63,8 +63,8 @@ interface UserSkillData{
 
 // Interfaz para pivote de Projects y Skills
 interface ProjectSkillData{
-  project_id:string,
-  skill_id:string
+  project_id:number,
+  skill_id:number
 }
 
 export { ModelData,  AdminData, UserData, JobData, SkillData, ProjectData, SectionData, UserSkillData, ProjectSkillData};

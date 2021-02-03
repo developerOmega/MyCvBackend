@@ -52,16 +52,38 @@ export default class PostgreSQL {
   public query(query:string = '', data:any[] = []) {
     
     return new Promise((resolve, reject) => {
-
-      query = PostgreSQL.statementsPost(query, data[0]);
+      
       query = PostgreSQL.statements(query);
       
+      this.connection.query( query, data, async (err:QueryError, results: QueryResult) => {
+  
+        if(err) {
+          reject(err.stack);
+        }
+  
+        resolve(results.rows);
+  
+      });
+
+    });
+
+  }
+
+   // Metodo que retorna informacion de query
+  // Recibe parametros -> query:string (consulta), data:array (datos privados)  
+  public queryPost(query:string = '', data:any[] = []) {
+    
+    return new Promise((resolve, reject) => {
+      
       let body:any[] = PostgreSQL.arrayData(data[0]);
+
+      query = PostgreSQL.paramsInStatement(query, body);
+      query = PostgreSQL.statementsPost(query, data[0]);
+      query = PostgreSQL.statements(query);
 
       this.connection.query( query, body, async (err:QueryError, results: QueryResult) => {
   
         if(err) {
-          console.log("HAY ERROR")
           reject(err.stack);
         }
   
@@ -79,7 +101,7 @@ export default class PostgreSQL {
       query:string = 'UPDATE table_name SET data? WHERE id=?', 
       data:array[body:object, id:number]
   */ 
-  queryPatch(query:string = '', data:any[] = []) {
+  public queryPatch(query:string = '', data:any[] = []) {
     return new Promise ((resolve, reject) => {
       let body:any = data[0];
       
@@ -104,7 +126,7 @@ export default class PostgreSQL {
 
   // Metodo que retorna query POST con los datos body
   // Recibe parametros -> query:string (consulta), body:object (datos de creacion)
-  static statementsPost(query:string, body:any) {
+  private static statementsPost(query:string, body:any) {
     let set:string[] = [];
 
     Object.keys(body).forEach( key => set.push(`${key}`) );
@@ -117,7 +139,7 @@ export default class PostgreSQL {
 
   // Metodo que retorna query UPDATE con los datos body
   // Recibe parametros -> query:string (consulta), body:object (datos de actualizacion)
-  static statementsPatch(query:string, body:any) {
+  private static statementsPatch(query:string, body:any) {
     let set:string[] = [];
     
     Object.keys(body).forEach( key => set.push(`${key}=?`) );
@@ -130,7 +152,7 @@ export default class PostgreSQL {
 
   // Metodo que retorna query con los placeholdres '?' remplzados a '$1', '$2', ...
   // Recibe parametro -> data:string (query)
-  static statements(data:string) {
+  private static statements(data:string) {
     let dataProto:string[] = data.split('?');
     let dataChar:string;
 
@@ -146,7 +168,7 @@ export default class PostgreSQL {
 
   // Metodo que convierte objeto a un array
   // Recibe parametro -> data:object
-  static arrayData( data:any ):any[]{
+  private static arrayData( data:any ):any[]{
     let body:any[] = [];
 
     for(let prop in data) {
@@ -156,4 +178,15 @@ export default class PostgreSQL {
     return body;
   }
 
+  // Metodo que convierte parametros de instancia en statements secretas
+  // Recibe parametros -> query:string, body:Array<string> 
+  private static paramsInStatement( query:string, body:string[] ):string{
+    
+    let queryProto:string[] = query.split('params?');
+    let params:string[] = [];
+    body.forEach( prop => params.push("?") );
+
+    queryProto.splice(1, 0, "(", params.join(','), ")");
+    return queryProto.join('');
+  }
 }

@@ -1,3 +1,4 @@
+
 import {Router, Request, Response} from 'express';
 import Admin from '../Models/Admin';
 
@@ -59,6 +60,7 @@ router.post('/admins', async (req: Request, res: Response) => {
   let body = req.body;
 
   try {
+
     let data = await Admin.create(body);
 
     return res.status(200).json({

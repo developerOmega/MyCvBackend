@@ -10,6 +10,8 @@ export default class Admin extends Model {
   protected email:string;
   protected password:string;
 
+  static ins: Admin;
+
   constructor(admin:ModelAndAdmin){
     super(admin);
     this.name = admin.name;
@@ -31,32 +33,34 @@ export default class Admin extends Model {
 
   static async byId(id:number) {
     try {
-      let data:any = await db.query(`SELECT * FROM tasks WHERE id=?`, [id]);
+      let data:any = await db.query(`SELECT * FROM admins WHERE id=?`, [id]);
       if(!data[0]){
         return false;
       }
-      let instance = new this(data[0]);
-      return instance;
+      this.ins = new this(data[0]);
+      return this.ins;
     } catch (err) {
       return err;
     }
   }
 
   static async create(body:ModelAndAdmin) {
+
     let query:any = await db.query(
-      `INSERT INTO tasks (name, email, password) VALUES (?,?,?) RETURNING *`,
-      [body.name, body.email, body.password]
+      `INSERT INTO admins data? VALUES (?,?,?) RETURNING *`,
+      [body]
     );
+
     return query[0];
   }
 
   async update(body:ModelAndAdmin) {
-    let query:any =  await db.queryPatch(`UPDATE tasks SET data? WHERE id = ? RETURNING *`, [body, this.id]);
+    let query:any =  await db.queryPatch(`UPDATE admins SET data? WHERE id = ? RETURNING *`, [body, this.id]);
     return query[0];
   }
 
   async delete() {
-    let data = await db.query( `DELETE FROM tasks WHERE id = ?`, [this.id]);
+    let data = await db.query( `DELETE FROM admins WHERE id = ?`, [this.id]);
     return data;
   }
 }

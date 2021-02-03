@@ -3,7 +3,7 @@ import { DatabaseEnv } from '../config/config';
 import { DbConection } from '../interfaces/Conection';
 
 // Parametros que almacenas las propiedades de coneccion a la base de datos de postgresql
-const parameters:DbConection = {
+const params:DbConection = {
   host: DatabaseEnv.host,
   user: DatabaseEnv.user,
   password: DatabaseEnv.password,
@@ -12,6 +12,6 @@ const parameters:DbConection = {
 }
 
 // Inicializar instalcia con el metodo estatico de instance
-const db = PostgreSQL.instance(parameters);
+const db = PostgreSQL.instance(params);
 
 export { db };

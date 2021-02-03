@@ -4,6 +4,8 @@ export default class Model {
   protected id:number;
   protected updated_at:string;
   protected created_at:string;
+
+  static ins: Model;
   
   constructor(model: ModelData){
     this.id = model.id;
@@ -23,10 +25,14 @@ export default class Model {
     })
   }
 
-  static async byId (id:number):Promise<unknown> {
-    return new Promise((resolve, reject) => {
+  static async byId (id:number) {
+    let params:ModelData = {
+      id: 1, updated_at: "qwe", created_at: "ty"
+    }
 
-    })
+    this.ins = new Model(params);
+
+    return this.ins;
   }
 
   static async create (body:ModelData):Promise<unknown> {
@@ -35,7 +41,7 @@ export default class Model {
     })
   }
 
-  async udpate (body:ModelData):Promise<unknown> {
+  async update (body:ModelData):Promise<unknown> {
     return new Promise((resolve, reject) => {
 
     })

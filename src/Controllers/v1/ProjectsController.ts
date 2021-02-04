@@ -199,9 +199,7 @@ export default class ProjectController {
     } catch (err) {
       return res.status(500).json({
         ok: false,
-        err: {
-          message: err.message
-        }
+        err
       })
     }
   }

@@ -45,6 +45,7 @@ interface ProjectData{
   title:string,
   link:string,
   description:string,
+  img:string;
   user_id:number
 }
 

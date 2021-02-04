@@ -154,9 +154,7 @@ export default class UserController {
     } catch (err) {
       return res.status(500).json({
         ok: false,
-        err: {
-          message: err.message
-        }
+        err: err
       })
     }
   }
@@ -198,9 +196,7 @@ export default class UserController {
     } catch (err) {
       return res.status(500).json({
         ok: false,
-        err: {
-          message: err.message
-        }
+        err
       })
     }
   }

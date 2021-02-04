@@ -9,6 +9,7 @@ export default class Project extends Model {
   protected title:string;
   protected link:string;
   protected description:string;
+  protected img: string;
   protected user_id:number;
 
   static ins:Project;
@@ -19,6 +20,7 @@ export default class Project extends Model {
     this.title = this.strip(project.title);
     this.link = this.strip(project.link);
     this.description = this.strip(project.description);
+    this.img = this.strip(project.img);
     this.user_id = project.user_id;
   }
 
@@ -44,10 +46,11 @@ export default class Project extends Model {
   public async skills(){
     let data = db.query(`
       SELECT skills.id, skills.name, skills.icon, skills.admin_id, skills.updated_at, skills.created_at
-      FORM projects INNER JOIN project_skills ON projects.id=project_skills.project_id
+      FROM projects INNER JOIN project_skills ON projects.id=project_skills.project_id
       INNER JOIN skills ON project_skills.skill_id=skills.id
-      WHERE project.id=?      
+      WHERE projects.id=?      
     `, [this.id]);
+    return data;
   }
 
 

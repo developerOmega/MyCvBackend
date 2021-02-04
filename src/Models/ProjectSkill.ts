@@ -10,7 +10,7 @@ export default class ProjectSkill extends Model {
   protected skill_id:number;
 
   static ins:ProjectSkill;
-  static table:string = "user_skills";
+  static table:string = "project_skills";
 
 
   constructor(projectSkill:ModelAndSkill){

@@ -7,7 +7,7 @@ const USERSKILL = new UserSkillsController();
 
 router.post('/user-skills', USERSKILL.post);
 
-router.delete('/user-skills/:id', USERSKILL.delete);
+router.delete('/user-skills/:user_id/:skill_id', USERSKILL.delete);
 
 
 export default router;

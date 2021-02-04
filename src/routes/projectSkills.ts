@@ -7,7 +7,7 @@ const PROJECTSKILL = new ProjectSkillsController();
 
 router.post('/project-skills', PROJECTSKILL.post);
 
-router.delete('/project-skills/:id', PROJECTSKILL.delete);
+router.delete('/project-skills/:project_id/:skill_id', PROJECTSKILL.delete);
 
 
 export default router;

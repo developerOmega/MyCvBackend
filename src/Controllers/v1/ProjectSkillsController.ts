@@ -32,7 +32,7 @@ export default class ProjectSkillController {
   
       return res.status(200).json({
         ok: true,
-        message: "El usuario se ha eliminado con exito"
+        message: "La relacion project-skill se ha eliminado con exito"
       })
   
     } catch (err) {

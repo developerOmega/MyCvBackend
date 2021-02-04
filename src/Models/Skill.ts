@@ -43,7 +43,7 @@ export default class Skill extends Model {
     let data = db.query( `
       SELECT projects.id, projects.title, projects.link, projects.description, projects.user_id, projects.created_at, projects.updated_at
       FROM skills INNER JOIN project_skills ON skills.id=project_skills.skill_id
-      INNER JOIN projects ON project_skills.project_id=project.id
+      INNER JOIN projects ON project_skills.project_id=projects.id
       WHERE skills.id = ?
     `, [this.id]);
 

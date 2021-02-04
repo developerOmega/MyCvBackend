@@ -32,7 +32,7 @@ export default class UserSkillController {
   
       return res.status(200).json({
         ok: true,
-        message: "El usuario se ha eliminado con exito"
+        message: "La relacion user-skill ha eliminado con exito"
       })
   
     } catch (err) {

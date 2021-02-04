@@ -138,4 +138,69 @@ export default class SkillController {
       })
     }
   }
+
+  public async indexAdmin(req: Request, res:Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let skill = await Skill.byId(id);
+      let data = await skill.admin();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
+
+  public async indexUsers(req: Request, res: Response){
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let skill = await Skill.byId(id);
+      let data = await skill.users();
+      
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
+
+  public async indexProjects(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let skill = await Skill.byId(id);
+      let data = await skill.projects();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
 }

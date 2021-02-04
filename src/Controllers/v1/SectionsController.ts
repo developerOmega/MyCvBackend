@@ -138,4 +138,26 @@ export default class SectionController {
       })
     }
   }
+
+  public async indexAdmin(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let section = await Section.byId(id);
+      let data = await section.admin();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
 }

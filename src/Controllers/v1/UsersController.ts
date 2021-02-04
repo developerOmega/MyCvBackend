@@ -138,4 +138,70 @@ export default class UserController {
       })
     }
   }
+
+  public async indexSkills(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let user = await User.byId(id);
+      let data = await user.skills();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
+
+  public async indexJobs(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let user = await User.byId(id);
+      let data = await user.jobs();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
+
+  public async indexProjects(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let user = await User.byId(id);
+      let data = await user.projects();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
 }

@@ -138,4 +138,26 @@ export default class AdminsController {
       })
     }
   }
+
+  public async indexSkills(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let admin = await Admin.byId(id);
+      let data = await admin.skills();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      });
+    }
+  }
 }

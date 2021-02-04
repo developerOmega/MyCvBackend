@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import Project from '../../Models/Project';
+import ProjectSkill from '../../Models/ProjectSkill';
 
 
 export default class ProjectController {
@@ -129,6 +130,72 @@ export default class ProjectController {
         message: "El proyecto se ha eliminado con exito"
       })
   
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
+
+  public async indexUser(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+    
+    try {
+      let project = await Project.byId(id);
+      let data = await project.user();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      });
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
+
+  public async indexSections(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let project = await Project.byId(id);
+      let data = await project.sections();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
+
+  public async indexSkills(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let project = await Project.byId(id);
+      let data = await project.skills();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
     } catch (err) {
       return res.status(500).json({
         ok: false,

@@ -138,4 +138,26 @@ export default class JobController {
       })
     }
   }
+
+  public async indexUser(req: Request, res: Response) {
+    let id:number = parseInt(req.params.id);
+
+    try {
+      let job = await Job.byId(id);
+      let data = await job.admin();
+
+      return res.status(200).json({
+        ok: true,
+        data
+      })
+
+    } catch (err) {
+      return res.status(500).json({
+        ok: false,
+        err: {
+          message: err.message
+        }
+      })
+    }
+  }
 }

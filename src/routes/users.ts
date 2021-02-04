@@ -13,6 +13,12 @@ router.post('/users', USER.post);
 
 router.put('/users/:id', USER.update);
 
-router.delete('/users/:id', USER.delete)
+router.delete('/users/:id', USER.delete);
+
+router.get('/users/:id/skills', USER.indexSkills);
+
+router.get('/users/:id/jobs', USER.indexJobs);
+
+router.get('/users/:id/projects', USER.indexProjects);
 
 export default router;

@@ -13,6 +13,8 @@ router.post('/admins', ADMIN.post);
 
 router.put('/admins/:id', ADMIN.update);
 
-router.delete('/admins/:id', ADMIN.delete)
+router.delete('/admins/:id', ADMIN.delete);
+
+router.get('/admins/:id/skills', ADMIN.indexSkills);
 
 export default router;

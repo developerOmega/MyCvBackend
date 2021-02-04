@@ -1,3 +1,4 @@
+import { db } from '../db/db';
 import Model from './Model';
 import { JobData, ModelData } from '../interfaces/Models';
 
@@ -21,6 +22,16 @@ export default class Job extends Model {
     this.init = job.init;
     this.finish = job.finish;
     this.user_id = job.user_id;
+  }
+
+  public async user() {
+    let data:any = db.query(`
+      SELECT users.id, users.first_name, users.last_name, users.email, users.img, users.main_img, users.description, users.updated_at, users.created_at
+      FROM jobs INNER JOIN jobs.user_id=users.id
+      WHERE jobs.id=? 
+    `, [this.id]);
+
+    return data[0];
   }
 
 }

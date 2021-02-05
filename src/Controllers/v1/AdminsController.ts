@@ -1,6 +1,8 @@
 import {Request, Response} from 'express';
 import Admin from '../../Models/Admin';
-
+import { JwtEnv } from '../../config/config';
+import jwt = require('jsonwebtoken');
+import bcrypt = require('bcrypt');
 
 export default class AdminsController {
 
@@ -62,9 +64,19 @@ export default class AdminsController {
 
     try {
   
-      let data = await Admin.create(body);
+
+      const params = {
+        name: body.name,
+        email: body.email,
+        password: bcrypt.hashSync(body.password, 10),
+      }
+
+      let data = await Admin.create(params);
+
+      let admin = await Admin.byEmail(body.email);
+      let token = jwt.sign({admin}, JwtEnv.privateAdKey, JwtEnv.signOptions);
   
-      return res.status(200).json({ ok: true, data });
+      return res.status(200).json({ ok: true, data, token });
   
     } catch (err) {
       return res.status(400).json({
@@ -156,6 +168,27 @@ export default class AdminsController {
         ok: false,
         err
       });
+    }
+  }
+
+  public async updatePassword(req: Request, res: Response){
+    let body = req.body;
+    let id:number = parseInt(req.params.id);
+    let user = await Admin.byId(id);
+
+    try {
+      let data = await user.update({ password: bcrypt.hashSync(body.new_password, 10) });
+      
+      return res.status(200).json({
+        ok: true,
+        data
+      });
+
+    } catch (err) {
+      return res.status(400).json({
+        ok: false,
+        err
+      })
     }
   }
 }

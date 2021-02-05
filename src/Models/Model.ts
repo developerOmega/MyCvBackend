@@ -48,7 +48,7 @@ export default class Model {
     }
   }
 
-  static async create(data:AdminData) {
+  static async create(data:any) {
 
     let query:any = await db.queryPost(
       `INSERT INTO ${this.table} data? VALUES params? RETURNING *`,

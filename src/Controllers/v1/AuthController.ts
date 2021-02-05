@@ -2,7 +2,7 @@ import {Request, Response} from 'express';
 import User from '../../Models/User';
 import Admin from '../../Models/Admin';
 import jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+import  bcrypt = require('bcrypt');
 
 import { JwtEnv } from '../../config/config';
 
@@ -10,7 +10,9 @@ class UserAuthController {
   public async login(req:  Request, res: Response){
     let body = req.body;
     try {
-      let user = await User.ByEmail(body.email);
+      let user = await User.byEmail(body.email);
+
+      console.log(body);
 
       if(!user){
         return res.status(401).json({
@@ -41,7 +43,9 @@ class UserAuthController {
     } catch (err) {
       return res.status(500).json({
         ok: false,
-        err
+        err: {
+          message: err.message
+        }
       })
     }
   }
@@ -51,9 +55,11 @@ class AdminAuthController {
   public async login(req:  Request, res: Response){
     let body = req.body;
     try {
-      let user = await Admin.ByEmail(body.email);
+      let admin = await Admin.byEmail(body.email);
 
-      if(!user){
+      console.log(admin);
+
+      if(!admin){
         return res.status(401).json({
           ok: false,
           err: {
@@ -62,7 +68,7 @@ class AdminAuthController {
         });
       }
 
-      if(!bcrypt.compareSync(body.password, user.password) ){
+      if(!bcrypt.compareSync(body.password, admin.password) ){
         return res.status(401).json({
           ok: false,
           err: {
@@ -71,11 +77,11 @@ class AdminAuthController {
         });
       }
 
-      const token = jwt.sign({user}, JwtEnv.privateAdKey, JwtEnv.signOptions );
+      const token = jwt.sign({admin}, JwtEnv.privateAdKey, JwtEnv.signOptions );
 
       return res.status(200).json({
         ok: true,
-        user,
+        admin,
         token
       })
 

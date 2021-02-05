@@ -1,6 +1,9 @@
 import {Request, Response} from 'express';
 import User from '../../Models/User';
+import jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
 
+import { JwtEnv } from '../../config/config';
 
 export default class UserController {
 
@@ -61,10 +64,21 @@ export default class UserController {
     let body = req.body;
 
     try {
+      
+      let params:any = {
+        first_name: body.first_name,
+        last_name: body.last_name,
+        email: body.email,
+        password: bcrypt.hashSync(body.password, 10),
+        description: body.description
+      };
+
+      let data = await User.create(params);
+
+      let user = await User.byEmail( body.email );
+      let token = jwt.sign({ user }, JwtEnv.privateUsKey, JwtEnv.signOptions);
   
-      let data = await User.create(body);
-  
-      return res.status(200).json({ ok: true, data });
+      return res.status(200).json({ ok: true, data, token });
   
     } catch (err) {
       return res.status(400).json({
@@ -195,6 +209,27 @@ export default class UserController {
 
     } catch (err) {
       return res.status(500).json({
+        ok: false,
+        err
+      })
+    }
+  }
+
+  public async updatePassword(req: Request, res: Response){
+    let body = req.body;
+    let id:number = parseInt(req.params.id);
+    let user = await User.byId(id);
+
+    try {
+      let data = await user.update({ password: bcrypt.hashSync(body.new_password, 10) });
+      
+      return res.status(200).json({
+        ok: true,
+        data
+      });
+
+    } catch (err) {
+      return res.status(400).json({
         ok: false,
         err
       })

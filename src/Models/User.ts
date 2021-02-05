@@ -28,11 +28,11 @@ export default class User extends Model {
     this.description = this.strip(user.description);
   }
 
-  static async ByEmail(email:string){
+  static async byEmail(email:string){
     
-    try {  
-      let data:any = db.query(`SELECT * FROM users WHERE email = ?`, [email]);
-  
+    try {
+      let data:any = await db.query(`SELECT * FROM users WHERE email = ?`, [email]);
+
       if(!data[0]){
         return false;
       }
@@ -46,7 +46,7 @@ export default class User extends Model {
   }
 
   public async skills(){
-    let data = db.query(`
+    let data = await db.query(`
       SELECT skills.id, skills.name, skills.icon, skills.admin_id, skills.updated_at, skills.created_at 
       FROM users INNER JOIN user_skills ON users.id=user_skills.user_id
       INNER JOIN skills ON user_skills.skill_id=skills.id

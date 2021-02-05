@@ -21,4 +21,6 @@ router.get('/users/:id/jobs', USER.indexJobs);
 
 router.get('/users/:id/projects', USER.indexProjects);
 
+router.put('/users/:id/password', USER.updatePassword);
+
 export default router;

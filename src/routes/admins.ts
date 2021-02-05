@@ -17,4 +17,6 @@ router.delete('/admins/:id', ADMIN.delete);
 
 router.get('/admins/:id/skills', ADMIN.indexSkills);
 
+router.put('/admins/:id/password', ADMIN.updatePassword);
+
 export default router;

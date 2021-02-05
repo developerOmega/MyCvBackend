@@ -21,10 +21,10 @@ export default class Admin extends Model {
 
   }
 
-  static async ByEmail(email:string){
+  static async byEmail(email:string){
     
     try {  
-      let data:any = db.query(`SELECT * FROM admins WHERE email = ?`, [email]);
+      let data:any = await db.query(`SELECT * FROM admins WHERE email = ?`, [email]);
   
       if(!data[0]){
         return false;

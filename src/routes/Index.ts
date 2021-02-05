@@ -9,6 +9,7 @@ import RouterSection from './sections'
 import RouterJob from './jobs';
 import RouterUserSkill from './userSkills';
 import RouterProjectSkill from './projectSkills';
+import RouterAuth from './auth';
 
 app.use(RouterAdmin);
 app.use(RouterUser);
@@ -19,5 +20,6 @@ app.use(RouterSection);
 app.use(RouterJob);
 app.use(RouterUserSkill);
 app.use(RouterProjectSkill);
+app.use(RouterAuth);
 
 export default app;

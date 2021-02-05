@@ -21,6 +21,23 @@ export default class Admin extends Model {
 
   }
 
+  static async ByEmail(email:string){
+    
+    try {  
+      let data:any = db.query(`SELECT * FROM admins WHERE email = ?`, [email]);
+  
+      if(!data[0]){
+        return false;
+      }
+  
+      this.ins = new this(data[0]);
+      return this.ins;
+
+    } catch (error) {
+      return error;
+    }
+  }
+
   public async skills() {
     let data = await db.query(
       `SELECT skills.name, skills.icon FROM skills 

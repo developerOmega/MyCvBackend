@@ -36,8 +36,12 @@ class JwtEnv {
     algorithm:  ["RS256"]
   };
 
-  // static publicKey = nodeEnv === 'development' ? fs.readFileSync('server/key/public.key', 'utf8') : process.env.PUBLIC_KEY.replace(/\\n/gm, '\n');
-  // static privateKey = nodeEnv === 'development' ? fs.readFileSync('server/key/private.key', 'utf8') : process.env.PRIVATE_KEY.replace(/\\n/gm, '\n'); 
+  static publicUsKey:string = nodeEnv === 'development' ? fs.readFileSync('../Key/publicUser.key', 'utf8') : (<any>process.env.PUBLIC_KEY).replace(/\\n/gm, '\n') || '';
+  static privateUsKey:string = nodeEnv === 'development' ? fs.readFileSync('../Key/privateUser.key', 'utf8') : (<any>process.env.PRIVATE_KEY).replace(/\\n/gm, '\n' || '');
+  
+  static publicAdKey:string = nodeEnv === 'development' ? fs.readFileSync('../Key/publicAdmin.key', 'utf8') : (<any>process.env.PUBLIC_KEY).replace(/\\n/gm, '\n') || '';
+  static privateAdKey:string = nodeEnv === 'development' ? fs.readFileSync('../Key/privateAdmin.key', 'utf8') : (<any>process.env.PRIVATE_KEY).replace(/\\n/gm, '\n' || '');
+  
 }
 
 // ====================================

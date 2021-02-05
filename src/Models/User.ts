@@ -28,6 +28,23 @@ export default class User extends Model {
     this.description = this.strip(user.description);
   }
 
+  static async ByEmail(email:string){
+    
+    try {  
+      let data:any = db.query(`SELECT * FROM users WHERE email = ?`, [email]);
+  
+      if(!data[0]){
+        return false;
+      }
+  
+      this.ins = new this(data[0]);
+      return this.ins;
+
+    } catch (error) {
+      return error;
+    }
+  }
+
   public async skills(){
     let data = db.query(`
       SELECT skills.id, skills.name, skills.icon, skills.admin_id, skills.updated_at, skills.created_at 

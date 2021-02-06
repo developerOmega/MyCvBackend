@@ -15,8 +15,8 @@ export default class Section extends Model {
 
   constructor(section:ModelAndSection){
     super(section);
-    this.content = this.strip(section.content);
-    this.img = this.strip(section.img);
+    this.content = section.content;
+    this.img = section.img;
     this.project_id = section.project_id;
 
 

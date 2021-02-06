@@ -17,8 +17,8 @@ export default class Job extends Model {
 
   constructor(job:ModelAndJob){
     super(job);
-    this.company = this.strip(job.company);
-    this.description = this.strip(job.description);
+    this.company = job.company;
+    this.description = job.description;
     this.init = job.init;
     this.finish = job.finish;
     this.user_id = job.user_id;

@@ -59,17 +59,20 @@ export default class JobController {
 
   public async post(req: Request, res: Response) {
     let body = req.body;
+    body.user_id = req.user.id;
 
     try {
-  
       let data = await Job.create(body);
   
       return res.status(200).json({ ok: true, data });
   
     } catch (err) {
+      console.error(err);
       return res.status(400).json({
         ok: false,
-        err
+        err: {
+          message: err.message
+        }
       });
     }
   }

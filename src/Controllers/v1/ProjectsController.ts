@@ -60,7 +60,8 @@ export default class ProjectController {
 
   public async post(req: Request, res: Response) {
     let body = req.body;
-
+    body.user_id = req.user.id;
+    
     try {
   
       let data = await Project.create(body);

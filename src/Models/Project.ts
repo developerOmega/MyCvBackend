@@ -17,10 +17,10 @@ export default class Project extends Model {
 
   constructor(project: ModelAndProject){
     super(project);
-    this.title = this.strip(project.title);
-    this.link = this.strip(project.link);
-    this.description = this.strip(project.description);
-    this.img = this.strip(project.img);
+    this.title = project.title;
+    this.link = project.link;
+    this.description = project.description;
+    this.img = project.img;
     this.user_id = project.user_id;
   }
 

@@ -15,8 +15,21 @@ export default class Model {
     this.created_at = model.created_at;
   }
 
-  protected strip(data:string):string {
+  // Metodo que elimina los caractares de HTML
+  // Recibe parametros -> data:string (valor del string)
+  protected static strip(data:string):string {
     return data.replace(/(<([^>]+)>)/gi, "");
+  }
+
+  // Metodo que elimina los caractes HTML de un objecto
+  // Recine parametros -> data:object (datos de objecto)
+  protected static striptData(data:any) {
+    for(let comp in data) {
+      if(typeof data[comp] == 'string')
+        data[comp] = this.strip(data[comp]);
+    }
+
+    return data;
   }
 
   static async all(){
@@ -50,6 +63,8 @@ export default class Model {
 
   static async create(data:any) {
 
+    data = this.striptData(data);
+
     let query:any = await db.queryPost(
       `INSERT INTO ${this.table} data? VALUES params? RETURNING *`,
       [data]
@@ -61,6 +76,9 @@ export default class Model {
   }
 
   async update(body:any) {
+
+    body = Model.striptData(body);
+
     let query:any =  await db.queryPatch(`UPDATE ${ Model.table } SET data? WHERE id = ? RETURNING *`, [body, this.id]);
     return query[0];
   }

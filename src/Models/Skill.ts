@@ -14,8 +14,8 @@ export default class Skill extends Model {
 
   constructor(skill: ModelAndSkill) {
     super(skill);
-    this.name = this.strip(skill.name);
-    this.icon = this.strip(skill.icon);
+    this.name = skill.name;
+    this.icon = skill.icon;
     this.admin_id = skill.admin_id;
   }
 

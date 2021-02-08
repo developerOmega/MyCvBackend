@@ -2,7 +2,7 @@ import fetch = require('isomorphic-fetch');
 const Dropbox = require('dropbox').Dropbox;
 import { dropboxEnv } from '../config/config';
 
-class DropboxApi {
+export default class DropboxApi {
     static instance:DropboxApi;
     protected dbx: any;
 
@@ -40,6 +40,3 @@ class DropboxApi {
     }
 
 }
-
-module.exports = DropboxApi;
-

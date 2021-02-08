@@ -32,6 +32,19 @@ export default class Model {
     return data;
   }
 
+  // Metodo para convertir los links publicos de dropbox en links de imagens
+  //  Recibe parametros -> url:string (link publico de archovo subido por el api de dbx)
+  static imageUrl(url:string) {
+  
+    if(url.match(/www.dropbox.com/)){
+      let regex = /www.dropbox.com/;
+      let imageUrl = url.replace(regex, 'dl.dropboxusercontent.com');
+      imageUrl = imageUrl.replace( /[?]dl=0/, '' );
+      return imageUrl;
+    }
+  
+  }
+
   static async all(){
     const data = await db.query(`SELECT * FROM ${ this.table }`);
     return data;

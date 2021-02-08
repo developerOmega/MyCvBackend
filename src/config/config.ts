@@ -13,7 +13,7 @@ const nodeEnv:string = process.env.NODE_ENV || 'development';
 // ====================================
 // Entorno de Dropbox
 // ====================================
-// const dropboxEnv = nodeEnv === 'development' ?  'Dw2AgsFcyFYAAAAAAAAAAZDWXWtrAdyGtmc6M2vsv7hRGpeLPrAp1fk1KKTEavYm' : process.env.DROPBOX;
+const dropboxEnv = nodeEnv === 'development' ? fs.readFileSync('src/Key/dropboxToken.key', 'utf8') : process.env.DROPBOX || ''; 
 
 // ====================================
 // JsonWebToken
@@ -36,11 +36,11 @@ class JwtEnv {
     algorithm:  ["RS256"]
   };
 
-  static publicUsKey:string = nodeEnv === 'development' ? fs.readFileSync('src/Key/publicUser.key', 'utf8') : (<any>process.env.PUBLIC_KEY).replace(/\\n/gm, '\n') || '';
-  static privateUsKey:string = nodeEnv === 'development' ? fs.readFileSync('src/Key/privateUser.key', 'utf8') : (<any>process.env.PRIVATE_KEY).replace(/\\n/gm, '\n' || '');
+  static publicUsKey:string = nodeEnv === 'development' ? fs.readFileSync('src/Key/publicUser.key', 'utf8') : (<any>process.env.PUBLICUS_KEY).replace(/\\n/gm, '\n') || '';
+  static privateUsKey:string = nodeEnv === 'development' ? fs.readFileSync('src/Key/privateUser.key', 'utf8') : (<any>process.env.PRIVATEUS_KEY).replace(/\\n/gm, '\n' || '');
   
-  static publicAdKey:string = nodeEnv === 'development' ? fs.readFileSync('src/Key/publicAdmin.key', 'utf8') : (<any>process.env.PUBLIC_KEY).replace(/\\n/gm, '\n') || '';
-  static privateAdKey:string = nodeEnv === 'development' ? fs.readFileSync('src/Key/privateAdmin.key', 'utf8') : (<any>process.env.PRIVATE_KEY).replace(/\\n/gm, '\n' || '');
+  static publicAdKey:string = nodeEnv === 'development' ? fs.readFileSync('src/Key/publicAdmin.key', 'utf8') : (<any>process.env.PUBLICAD_KEY).replace(/\\n/gm, '\n') || '';
+  static privateAdKey:string = nodeEnv === 'development' ? fs.readFileSync('src/Key/privateAdmin.key', 'utf8') : (<any>process.env.PRIVATEAD_KEY).replace(/\\n/gm, '\n' || '');
   
 }
 
@@ -58,5 +58,5 @@ class DatabaseEnv {
 
 
 export { 
-  port, nodeEnv, JwtEnv, DatabaseEnv
+  port, nodeEnv, JwtEnv, DatabaseEnv, dropboxEnv
 };

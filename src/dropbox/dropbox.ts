@@ -1,41 +1,42 @@
 import fetch = require('isomorphic-fetch');
 const Dropbox = require('dropbox').Dropbox;
-const { dropboxEnv } = require('../../config/config');
+import { dropboxEnv } from '../config/config';
 
 class DropboxApi {
-    static instance;
+    static instance:DropboxApi;
+    protected dbx: any;
 
     constructor(){
-        this.dbx = new Dropbox({accessToken: dropboxEnv, fetch});  
+      this.dbx = new Dropbox({accessToken: dropboxEnv, fetch});  
     }
 
     static on(){
-      this.instance = this.instance || new DropboxApi();
+      this.instance = this.instance || new this();
       return this.instance;
     }
 
-    listFolder(path, callback){
+    listFolder(path:string, callback:Function){
       this.dbx.filesListFolder({path})
-        .then(response => callback(null, response))
-        .catch(error => callback(error)); 
+        .then((response:any) => callback(null, response))
+        .catch((error:any) => callback(error)); 
     }
 
-    upload(path, contents, callback ){
+    upload(path:string, contents:any, callback:Function ){
       this.dbx.filesUpload({path, contents})
-        .then( response => callback(null, response))
-        .catch( error => callback(error));
+        .then( (response:any) => callback(null, response))
+        .catch( (error:any) => callback(error));
     }
 
-    sharedLink(path, callback){
+    sharedLink(path:string, callback:Function){
       this.dbx.sharingCreateSharedLinkWithSettings({path})
-        .then(response => callback(null, response))
-        .catch(error => callback(error));
+        .then((response:any) => callback(null, response))
+        .catch((error:any) => callback(error));
     }
 
-    delete(path, callback){
+    delete(path:string, callback:Function){
       this.dbx.filesDelete({path})
-        .then(response => callback(null, response))
-        .catch(error => callback(error));
+        .then((response:any) => callback(null, response))
+        .catch((error:any) => callback(error));
     }
 
 }

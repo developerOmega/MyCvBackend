@@ -30,4 +30,8 @@ router.put('/users/:id/password', [authUser, authUserBySession], USER.updatePass
 
 router.post('/users/:id/img', USER_FILE.post);
 
+router.delete('/users/:id/img', USER_FILE.delete);
+
+router.put('/users/:id/img', USER_FILE.update);
+
 export default router;

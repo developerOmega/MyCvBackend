@@ -1,5 +1,4 @@
-
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import UsersController from '../Controllers/v1/UsersController';
 import UserFilesController from '../Controllers/v1/UserFilesController';
 import { authUser, authAdmin } from '../Middlewares/authJwt';
@@ -28,10 +27,10 @@ router.get('/users/:id/projects', USER.indexProjects);
 
 router.put('/users/:id/password', [authUser, authUserBySession], USER.updatePassword);  
 
-router.post('/users/:id/img', USER_FILE.post);
+router.post('/users/:id/img', (req: Request, res: Response) => USER_FILE.post(req, res));
 
-router.delete('/users/:id/img', USER_FILE.delete);
+router.delete('/users/:id/img', (req: Request, res: Response) => USER_FILE.delete(req, res));
 
-router.put('/users/:id/img', USER_FILE.update);
+router.put('/users/:id/img', (req: Request, res: Response) => USER_FILE.update(req, res));
 
 export default router;

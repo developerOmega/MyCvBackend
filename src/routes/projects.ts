@@ -1,11 +1,15 @@
 
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import ProjectsController from '../Controllers/v1/ProjectsController';
+import ProjectFilesController from '../Controllers/v1/ProjectFilesController';
 import { authProjectByUser } from '../Middlewares/authProject';
 import { authUser } from '../Middlewares/authJwt';
 
+
+
 const router = Router();
 const PROJECT = new ProjectsController();
+const PROJECT_FILE = new ProjectFilesController();
 
 router.get('/projects', PROJECT.index);
 
@@ -22,5 +26,14 @@ router.get('/projects/:id/user', PROJECT.indexUser);
 router.get('/projects/:id/sections', PROJECT.indexSections);
 
 router.get('/projects/:id/skills', PROJECT.indexSkills);
+
+
+
+router.post('/projects/:id/img', (req: Request, res: Response) => PROJECT_FILE.post(req, res));
+
+router.delete('/projects/:id/img', (req: Request, res: Response) => PROJECT_FILE.delete(req, res));
+
+router.put('/projects/:id/img', (req: Request, res: Response) => PROJECT_FILE.update(req, res));
+
 
 export default router;

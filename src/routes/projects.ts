@@ -30,9 +30,10 @@ router.get('/projects/:id/skills', PROJECT.indexSkills);
 
 router.post('/projects/:id/img', [authUser, authProjectByUser, validateFiles], (req: Request, res: Response) => PROJECT_FILE.post(req, res));
 
-router.delete('/projects/:id/img', [authUser, authProjectByUser, validateFiles], (req: Request, res: Response) => PROJECT_FILE.delete(req, res));
+router.put('/projects/:id/img', [authUser, authProjectByUser, validateFiles], (req: Request, res: Response) => PROJECT_FILE.update(req, res));
 
-router.put('/projects/:id/img', [authUser, authProjectByUser], (req: Request, res: Response) => PROJECT_FILE.update(req, res));
+router.delete('/projects/:id/img', [authUser, authProjectByUser], (req: Request, res: Response) => PROJECT_FILE.delete(req, res));
+
 
 
 export default router;

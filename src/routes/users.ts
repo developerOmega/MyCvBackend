@@ -39,8 +39,9 @@ router.delete('/users/:id/img', [authUser, authUserBySession], (req: Request, re
 
 router.post('/users/:id/main_img', [authUser, authUserBySession, validateFiles], (req: Request, res: Response) => USER_MIMG_FILE.post(req, res));
 
-router.delete('/users/:id/main_img', [authUser, authUserBySession, validateFiles], (req: Request, res: Response) => USER_MIMG_FILE.delete(req, res));
+router.put('/users/:id/main_img', [authUser, authUserBySession, validateFiles], (req: Request, res: Response) => USER_MIMG_FILE.update(req, res));
 
-router.put('/users/:id/main_img', [authUser, authUserBySession], (req: Request, res: Response) => USER_MIMG_FILE.update(req, res));
+router.delete('/users/:id/main_img', [authUser, authUserBySession], (req: Request, res: Response) => USER_MIMG_FILE.delete(req, res));
+
 
 export default router;

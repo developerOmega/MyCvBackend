@@ -25,8 +25,9 @@ router.get('/sections/:id/admin', SECTION.indexAdmin);
 
 router.post('/sections/:id/img', [authUser, authSectionByUser, validateFiles], (req: Request, res: Response) => SECTION_FILE.post(req, res));
 
-router.delete('/sections/:id/img', [authUser, authSectionByUser, validateFiles], (req: Request, res: Response) => SECTION_FILE.delete(req, res));
+router.put('/sections/:id/img', [authUser, authSectionByUser, validateFiles], (req: Request, res: Response) => SECTION_FILE.update(req, res));
 
-router.put('/sections/:id/img', [authUser, authSectionByUser], (req: Request, res: Response) => SECTION_FILE.update(req, res));
+router.delete('/sections/:id/img', [authUser, authSectionByUser], (req: Request, res: Response) => SECTION_FILE.delete(req, res));
+
 
 export default router;

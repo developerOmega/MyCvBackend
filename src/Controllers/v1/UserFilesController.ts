@@ -19,12 +19,14 @@ class UserMainImgFilesController extends FilesController{
 
   protected fileName:string;
   protected pref:string;
+  protected prop:string;
   protected ins = User
 
   constructor( ) {
     super();
     this.fileName  = '/images/main_image.png';
-    this.pref = 'us-m-img'; 
+    this.pref = 'us-m-img';
+    this.prop = 'main_img' 
   }
 
   protected updateTo(url:string | undefined):Object {

@@ -45,6 +45,14 @@ export default class Model {
   
   }
 
+  // Metodo que busca el nombre de un archivo / imagen,
+  // Recibe parametro -> link:string (Lonk donde se encuentra guardo el archivo)
+  static getImg(link:string):string {
+    let cutImg:string[] = link.split('/');    
+    let fileName:string = cutImg[cutImg.length -1];
+    return `/${fileName}`;
+  }
+
   static async all(){
     const data = await db.query(`SELECT * FROM ${ this.table }`);
     return data;

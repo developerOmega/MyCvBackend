@@ -4,7 +4,7 @@ import ProjectsController from '../Controllers/v1/ProjectsController';
 import ProjectFilesController from '../Controllers/v1/ProjectFilesController';
 import { authProjectByUser } from '../Middlewares/authProject';
 import { authUser } from '../Middlewares/authJwt';
-
+import { validateFiles } from '../Middlewares/validateFiles';
 
 
 const router = Router();
@@ -28,12 +28,11 @@ router.get('/projects/:id/sections', PROJECT.indexSections);
 router.get('/projects/:id/skills', PROJECT.indexSkills);
 
 
+router.post('/projects/:id/img', [authUser, authProjectByUser, validateFiles], (req: Request, res: Response) => PROJECT_FILE.post(req, res));
 
-router.post('/projects/:id/img', (req: Request, res: Response) => PROJECT_FILE.post(req, res));
+router.delete('/projects/:id/img', [authUser, authProjectByUser, validateFiles], (req: Request, res: Response) => PROJECT_FILE.delete(req, res));
 
-router.delete('/projects/:id/img', (req: Request, res: Response) => PROJECT_FILE.delete(req, res));
-
-router.put('/projects/:id/img', (req: Request, res: Response) => PROJECT_FILE.update(req, res));
+router.put('/projects/:id/img', [authUser, authProjectByUser], (req: Request, res: Response) => PROJECT_FILE.update(req, res));
 
 
 export default router;

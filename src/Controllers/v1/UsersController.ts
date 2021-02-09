@@ -235,4 +235,5 @@ export default class UserController {
       })
     }
   }
+
 }

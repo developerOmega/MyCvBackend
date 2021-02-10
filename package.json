@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "tsc",
     "nodemon": "nodemon dist/index.js",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },
   "author": "Daniel Mendoza",
   "license": "ISC",
+  "engines": { 
+    "node": "14.15.4" 
+  },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",

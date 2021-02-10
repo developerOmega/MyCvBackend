@@ -1,0 +1,27 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = require("express");
+const app = express();
+const admins_1 = __importDefault(require("./admins"));
+const users_1 = __importDefault(require("./users"));
+const skills_1 = __importDefault(require("./skills"));
+const projects_1 = __importDefault(require("./projects"));
+const sections_1 = __importDefault(require("./sections"));
+const jobs_1 = __importDefault(require("./jobs"));
+const userSkills_1 = __importDefault(require("./userSkills"));
+const projectSkills_1 = __importDefault(require("./projectSkills"));
+const auth_1 = __importDefault(require("./auth"));
+app.use(admins_1.default);
+app.use(users_1.default);
+app.use(skills_1.default);
+app.use(projects_1.default);
+app.use(sections_1.default);
+app.use(sections_1.default);
+app.use(jobs_1.default);
+app.use(userSkills_1.default);
+app.use(projectSkills_1.default);
+app.use(auth_1.default);
+exports.default = app;

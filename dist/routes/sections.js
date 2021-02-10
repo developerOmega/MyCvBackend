@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const SectionsController_1 = __importDefault(require("../Controllers/v1/SectionsController"));
+const SectionFilesController_1 = __importDefault(require("../Controllers/v1/SectionFilesController"));
+const authSection_1 = require("../Middlewares/authSection");
+const authJwt_1 = require("../Middlewares/authJwt");
+const validateFiles_1 = require("../Middlewares/validateFiles");
+const router = express_1.Router();
+const SECTION = new SectionsController_1.default();
+const SECTION_FILE = new SectionFilesController_1.default();
+router.get('/sections', SECTION.index);
+router.get('/sections/:id', SECTION.show);
+router.post('/sections', [authJwt_1.authUser, authSection_1.authCreateSection], SECTION.post);
+router.put('/sections/:id', [authJwt_1.authUser, authSection_1.authSectionByUser], SECTION.update);
+router.delete('/sections/:id', [authJwt_1.authUser, authSection_1.authSectionByUser], SECTION.delete);
+router.get('/sections/:id/admin', SECTION.indexAdmin);
+router.post('/sections/:id/img', [authJwt_1.authUser, authSection_1.authSectionByUser, validateFiles_1.validateFiles], (req, res) => SECTION_FILE.post(req, res));
+router.put('/sections/:id/img', [authJwt_1.authUser, authSection_1.authSectionByUser, validateFiles_1.validateFiles], (req, res) => SECTION_FILE.update(req, res));
+router.delete('/sections/:id/img', [authJwt_1.authUser, authSection_1.authSectionByUser], (req, res) => SECTION_FILE.delete(req, res));
+exports.default = router;

@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Cv app",
   "main": "index.js",
+  "compilerOptions" : {
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon dist/index.js",

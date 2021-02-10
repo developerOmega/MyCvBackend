@@ -1,4 +1,3 @@
-
 import { Router } from 'express';
 import AdminsController from '../Controllers/v1/AdminsController';
 import { authAdmin } from '../Middlewares/authJwt';

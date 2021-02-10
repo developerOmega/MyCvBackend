@@ -2,8 +2,9 @@ import Server from './server/server';
 import RouterIndex from './routes/Index';
 import fileUpload from 'express-fileupload';
 import bodyParser = require('body-parser');
+import { port as portConfig } from './config/config';
 
-const port = 3000
+const port = portConfig
 const server = Server.init(port);
 
 server.app.use(bodyParser.urlencoded({ extended: false }));

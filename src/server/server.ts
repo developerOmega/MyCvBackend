@@ -3,14 +3,14 @@ import path = require('path');
 
 export default class Server{
   public app: express.Application;
-  public port:number;
+  public port:any;
   
   constructor(port:number){
     this.port = port;
     this.app = express();
   }
 
-  static init(port:number){
+  static init(port:any){
     return new Server(port);
   }
 

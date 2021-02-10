@@ -1,13 +1,18 @@
 import { db } from '../db/db';
-import { AdminData, ModelData } from '../interfaces/Models';
+import { ModelData } from '../interfaces/Models';
 
 export default class Model {
+  
+  // Propiedades de la tabla 
   protected id:number;
   protected updated_at:string;
   protected created_at:string;
 
+  // Instacia del Modelo
   static ins: Model;
-  static table:string = "Model";
+
+  // Nombre de la tabla de la db
+  static table:string = "models";
   
   constructor(model: ModelData){
     this.id = model.id;

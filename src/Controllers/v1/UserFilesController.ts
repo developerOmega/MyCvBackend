@@ -13,6 +13,7 @@ class UserImgFilesController extends FilesController{
     this.fileName  = '/images/profile.png';
     this.pref = 'us-img'; 
   }
+  
 }
 
 class UserMainImgFilesController extends FilesController{

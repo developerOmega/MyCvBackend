@@ -72,11 +72,5 @@
   ],
   "include": [
     "src"
-  ],
-  "ts-node": {
-    "files": true
-  },
-  "files": [
-    "src/index.ts"
   ]
 }

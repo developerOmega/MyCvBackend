@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon dist/index.js",
     "build": "tsc -w",
-    "start": "node dist/index.js"
+    "start": "ts-node src/index.ts"
   },
   "author": "Daniel Mendoza",
   "license": "ISC",
@@ -22,7 +22,9 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "pg": "^8.5.1",
-    "pg-hstore": "^2.3.3"
+    "pg-hstore": "^2.3.3",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

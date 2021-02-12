@@ -68,7 +68,7 @@ export default class User extends Model {
 
   public async projects() {
     let data = db.query(`
-      SELECT projects.id, projects.title, projects.link, projects.description, projects.user_id, projects.created_at, projects.updated_at
+      SELECT projects.id, projects.title, projects.link, projects.description, projects.img, projects.user_id, projects.created_at, projects.updated_at
       FROM users INNER JOIN projects ON users.id=projects.user_id
       WHERE projects.user_id=? 
     `, [this.id]);

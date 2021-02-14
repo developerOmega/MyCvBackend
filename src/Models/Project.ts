@@ -45,7 +45,7 @@ export default class Project extends Model {
 
   public async skills(){
     let data = db.query(`
-      SELECT skills.id, skills.name, skills.icon, skills.admin_id, skills.updated_at, skills.created_at
+      SELECT skills.id, skills.name, skills.icon, skills.is_svg, skills.admin_id, skills.updated_at, skills.created_at
       FROM projects INNER JOIN project_skills ON projects.id=project_skills.project_id
       INNER JOIN skills ON project_skills.skill_id=skills.id
       WHERE projects.id=?      

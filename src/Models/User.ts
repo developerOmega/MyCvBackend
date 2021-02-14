@@ -47,7 +47,7 @@ export default class User extends Model {
 
   public async skills(){
     let data = await db.query(`
-      SELECT skills.id, skills.name, skills.icon, skills.admin_id, skills.updated_at, skills.created_at 
+      SELECT skills.id, skills.name, skills.icon, skills.is_svg, skills.admin_id, skills.updated_at, skills.created_at 
       FROM users INNER JOIN user_skills ON users.id=user_skills.user_id
       INNER JOIN skills ON user_skills.skill_id=skills.id
       WHERE users.id = ?

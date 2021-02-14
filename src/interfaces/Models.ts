@@ -37,6 +37,7 @@ interface JobData {
 interface SkillData{
   name:string,
   icon:string,
+  is_svg:boolean,
   admin_id:number
 }
 

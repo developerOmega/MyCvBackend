@@ -7,6 +7,7 @@ interface ModelAndSkill extends SkillData, ModelData {};
 export default class Skill extends Model {
   protected name:string;
   protected icon:string;
+  protected is_svg:boolean;
   protected admin_id:number;
 
   static ins:Skill;
@@ -16,6 +17,7 @@ export default class Skill extends Model {
     super(skill);
     this.name = skill.name;
     this.icon = skill.icon;
+    this.is_svg = skill.is_svg;
     this.admin_id = skill.admin_id;
   }
 

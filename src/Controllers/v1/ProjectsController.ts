@@ -5,7 +5,7 @@ import ProjectSkill from '../../Models/ProjectSkill';
 
 export default class ProjectController {
 
-  public static async index(req: Request, res: Response) {
+  public async index(req: Request, res: Response) {
     let init:any  = req.query.init;
     let end:any = req.query.end;
 
@@ -30,7 +30,7 @@ export default class ProjectController {
     }
   }
 
-  public static async show(req: Request, res: Response) {
+  public async show(req: Request, res: Response) {
     let id:any = req.params.id;
 
     try {
@@ -58,7 +58,7 @@ export default class ProjectController {
     }
   }
 
-  public static async post(req: Request, res: Response) {
+  public async post(req: Request, res: Response) {
     let body = req.body;
     body.user_id = req.user.id;
     
@@ -76,7 +76,7 @@ export default class ProjectController {
     }
   }
 
-  public static async update(req: Request, res: Response) {
+  public async update(req: Request, res: Response) {
     let id:number = parseInt(req.params.id);
     let body = req.body;
   
@@ -108,7 +108,7 @@ export default class ProjectController {
     }
   }
 
-  public static async delete(req: Request, res: Response) {
+  public async delete(req: Request, res: Response) {
     let id:number = parseInt(req.params.id);
 
     try {
@@ -141,7 +141,7 @@ export default class ProjectController {
     }
   }
 
-  public static async indexUser(req: Request, res: Response) {
+  public async indexUser(req: Request, res: Response) {
     let id:number = parseInt(req.params.id);
     
     try {
@@ -163,7 +163,7 @@ export default class ProjectController {
     }
   }
 
-  public static async indexSections(req: Request, res: Response) {
+  public async indexSections(req: Request, res: Response) {
     let id:number = parseInt(req.params.id);
 
     try {
@@ -185,7 +185,7 @@ export default class ProjectController {
     }
   }
 
-  public static async indexSkills(req: Request, res: Response) {
+  public async indexSkills(req: Request, res: Response) {
     let id:number = parseInt(req.params.id);
 
     try {

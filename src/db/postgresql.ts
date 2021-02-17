@@ -36,7 +36,7 @@ export default class PostgreSQL {
       password: this.password,
       database: this.database,
       port: this.port,
-      ssl: true
+      ssl: { rejectUnauthorized: false }
     });
 
     this.connection.connect();

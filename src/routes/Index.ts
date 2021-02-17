@@ -16,7 +16,6 @@ app.use(RouterUser);
 app.use(RouterSkill);
 app.use(RouterProject);
 app.use(RouterSection);
-app.use(RouterSection);
 app.use(RouterJob);
 app.use(RouterUserSkill);
 app.use(RouterProjectSkill);

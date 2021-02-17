@@ -8,24 +8,24 @@ import { validateFiles } from '../Middlewares/validateFiles';
 
 
 const router = Router();
-const PROJECT = new ProjectsController();
+// const PROJECT = new ProjectsController();
 const PROJECT_FILE = new ProjectFilesController();
 
-router.get('/projects', PROJECT.index);
+router.get('/projects', ProjectsController.index);
 
-router.get('/projects/:id', PROJECT.show);
+router.get('/projects/:id', ProjectsController.show);
 
-router.post('/projects', authUser, PROJECT.post);
+router.post('/projects', authUser, ProjectsController.post);
 
-router.put('/projects/:id', [authUser, authProjectByUser], PROJECT.update);
+router.put('/projects/:id', [authUser, authProjectByUser], ProjectsController.update);
 
-router.delete('/projects/:id', [authUser, authProjectByUser], PROJECT.delete);
+router.delete('/projects/:id', [authUser, authProjectByUser], ProjectsController.delete);
 
-router.get('/projects/:id/user', PROJECT.indexUser);
+router.get('/projects/:id/user', ProjectsController.indexUser);
 
-router.get('/projects/:id/sections', PROJECT.indexSections);
+router.get('/projects/:id/sections', ProjectsController.indexSections);
 
-router.get('/projects/:id/skills', PROJECT.indexSkills);
+router.get('/projects/:id/skills', ProjectsController.indexSkills);
 
 router.get('/qwerty', (req: Request, res: Response) => {
   return res.status(200).json({

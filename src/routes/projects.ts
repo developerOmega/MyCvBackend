@@ -27,6 +27,13 @@ router.get('/projects/:id/sections', PROJECT.indexSections);
 
 router.get('/projects/:id/skills', PROJECT.indexSkills);
 
+router.get('/qwerty', (req: Request, res: Response) => {
+  return res.status(200).json({
+    ok: true,
+    message: "El error no son las rutas"
+  });
+});
+
 
 router.post('/projects/:id/img', [authUser, authProjectByUser, validateFiles], (req: Request, res: Response) => PROJECT_FILE.post(req, res));
 

@@ -5,7 +5,7 @@ export default class Server{
   public app: express.Application;
   public port:any;
   
-  constructor(port:number){
+  constructor(port:any){
     this.port = port;
     this.app = express();
   }

@@ -40,7 +40,7 @@ export default class Admin extends Model {
 
   public async skills() {
     let data = await db.query(
-      `SELECT skills.name, skills.icon FROM skills 
+      `SELECT skills.name, skills.icon, skills.is_svg FROM skills 
       INNER JOIN admins ON skills.admin_id=admins.id 
       WHERE skills.admin_id= ? ;`,
       [ this.id ]

@@ -1,5 +1,6 @@
 import express = require('express');
-const app:express.Application = express();
+import { server } from '../index';
+// import Server from '../server/server';
 
 import RouterAdmin from './admins';
 import RouterUser from './users';
@@ -11,14 +12,17 @@ import RouterUserSkill from './userSkills';
 import RouterProjectSkill from './projectSkills';
 import RouterAuth from './auth';
 
-app.use(RouterAdmin);
-app.use(RouterUser);
-app.use(RouterSkill);
-app.use(RouterProject);
-app.use(RouterSection);
-app.use(RouterJob);
-app.use(RouterUserSkill);
-app.use(RouterProjectSkill);
-app.use(RouterAuth);
 
-export default app;
+const addRouter = () => {
+  server.app.use(RouterAdmin);
+  server.app.use(RouterUser);
+  server.app.use(RouterSkill);
+  server.app.use(RouterProject);
+  server.app.use(RouterSection);
+  server.app.use(RouterJob);
+  server.app.use(RouterUserSkill);
+  server.app.use(RouterProjectSkill);
+  server.app.use(RouterAuth);
+}
+
+export default addRouter;

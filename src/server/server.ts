@@ -20,7 +20,7 @@ export default class Server{
   }
 
   public start(callback: Function){
-    this.app.listen(this.port, callback() );
+    this.app.listen(process.env.PORT || 4000, callback() );
     this.publicPath();
   }
 }

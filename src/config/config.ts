@@ -3,7 +3,7 @@ const fs = require('fs');
 // ====================================
 // Puerto
 // ====================================
-const port:any = process.env.PORT || 4000;
+const port:number|string = process.env.PORT || 4000;
 
 // ====================================
 // Entorno

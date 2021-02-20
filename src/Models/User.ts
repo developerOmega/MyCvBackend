@@ -50,7 +50,7 @@ export default class User extends Model {
       SELECT skills.id, skills.name, skills.icon, skills.is_svg, skills.admin_id, skills.updated_at, skills.created_at 
       FROM users INNER JOIN user_skills ON users.id=user_skills.user_id
       INNER JOIN skills ON user_skills.skill_id=skills.id
-      WHERE users.id = ? ORDER BY skills.id DESC
+      WHERE users.id = ? ORDER BY skills.id ASC
     `, [this.id]);
 
     return data;
@@ -60,7 +60,7 @@ export default class User extends Model {
     let data = db.query(`
       SELECT jobs.id, jobs.company, jobs.init, jobs.finish, jobs.description, jobs.user_id, jobs.updated_at, jobs.created_at
       FROM users INNER JOIN jobs ON users.id=jobs.user_id
-      WHERE jobs.user_id=? ORDER BY jobs.id DESC
+      WHERE jobs.user_id=? ORDER BY jobs.id ASC
     `, [this.id]);
 
     return data;
@@ -70,7 +70,7 @@ export default class User extends Model {
     let data = db.query(`
       SELECT projects.id, projects.title, projects.link, projects.description, projects.img, projects.user_id, projects.created_at, projects.updated_at
       FROM users INNER JOIN projects ON users.id=projects.user_id
-      WHERE projects.user_id=? ORDER BY projects.id DESC
+      WHERE projects.user_id=? ORDER BY projects.id ASC
     `, [this.id]);
 
     return data;

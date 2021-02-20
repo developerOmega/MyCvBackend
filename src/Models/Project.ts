@@ -38,7 +38,7 @@ export default class Project extends Model {
     let data = db.query(`
       SELECT sections.id, sections.content, sections.img, sections.project_id, sections.updated_at, sections.created_at
       FROM projects INNER JOIN sections ON projects.id=sections.project_id
-      WHERE sections.project_id=?
+      WHERE sections.project_id=? ORDER BY sections.id DESC
     `, [this.id]);
     return data;
   }
@@ -48,7 +48,7 @@ export default class Project extends Model {
       SELECT skills.id, skills.name, skills.icon, skills.is_svg, skills.admin_id, skills.updated_at, skills.created_at
       FROM projects INNER JOIN project_skills ON projects.id=project_skills.project_id
       INNER JOIN skills ON project_skills.skill_id=skills.id
-      WHERE projects.id=?      
+      WHERE projects.id=? ORDER BY skills.id DESC  
     `, [this.id]);
     return data;
   }
